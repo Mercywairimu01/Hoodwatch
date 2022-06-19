@@ -1,6 +1,7 @@
 from django.db import models
 from PIL import Image
 from django.db.models import Q
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -83,5 +84,32 @@ class Business(models.Model):
         search_results = cls.objects.filter(Q(name__icontains=search_name))
         return search_results
 
+class Post(models.Model):
+    title = models.CharField(max_length=120, null=True)
+    description=models.TextField(max_length=500)
+    date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
+    hood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, related_name='hood_post')
+    
+    
+    def __str__(self):
+     return self.title
 
+    @classmethod
+    def save_post(self):
+        self.save()
+
+    @classmethod
+    def delete_post(self):
+        self.delete()
+
+    def user_post(self,cls,username):
+        posts=cls.objects.filter(author_username=username)
+        return posts
+
+    # def get_absolute_url(self):
+    #     return reverse('post-detail', kwargs={'pk': self.pk})
+    
+    class Meta:
+      ordering = ['-id']
 
