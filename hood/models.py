@@ -1,5 +1,6 @@
 from django.db import models
 from PIL import Image
+from django.db.models import Q
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -53,7 +54,34 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self. image.path)
 
- 
+
+class Business(models.Model):
+    name = models.CharField(max_length=120)
+    email = models.EmailField(max_length=254)
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
+
+    def __str__(self):
+        return f'{self.name} Business'
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def find_business(cls,business_id):
+        return cls.objects.filter(id=business_id)
+
+    @classmethod
+    def update_business(cls,business_id,location):
+      return cls.objects.filter(id=business_id).update(location=location)
+
+    @classmethod
+    def search_business(cls,search_name):
+        search_results = cls.objects.filter(Q(name__icontains=search_name))
+        return search_results
 
 
 
