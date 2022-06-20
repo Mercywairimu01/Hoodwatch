@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container" style="margin-top:8px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-5">
+                        <img src="{{ hood.hood_img.url }}" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h5 class="card-title tt">Hood: {{ hood.name }} ({{hood.location}})
+                            </h5>
+                            <h6 class="card-text">
+                                <span><strong>{{hood.occupant_count}}</strong> Members</span>
+                                | <strong>{{ hood.business.count }}</strong> Businesses | <strong>
+                               
+                            </h6>
+
+                            <p class="card-text"><span class="text-info">Police Tell :</span>
+                                &nbsp;<strong>{{hood.police}}</strong> |
+                                <span class="text-info">Hospital Tell :</span> <strong>{{hood.health}}</strong></p>
+                            <p class="card-text">Administrator: <small class="text-muted">
+                                {{ hood.admin.user.username }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container bg-white hoode">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{% url 'business' %}" class="btn btn-sm btn-outline-info mb-4 mr-4">Add Business</a>
+                    <a href="{% url 'post' %}" class="btn btn-sm btn-outline-info mb-4 mr-4">Add Post</a>
+                <h5 class="D-block mx-auto tt">Businesses in the hood</h5>
+                <hr>
+                <div class="row">
+                    {% for bus in business %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                           <img src="{{bus.bs_image.url}}" alt="" height="200px" >
+                            <div class="card-body">
+                                <h5 class="card-title">Business: {{bus.name}}
+                                </h5>
+                                <p class="card-text">Contact: {{bus.email}}</p>
+                               
+                                <p class="card-text">Owner: <small class="text-muted">
+                                    {{ bus.user.user.username|title }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <h5 class="D-block mx-auto tt">Posts for the hood</h5>
+                <div class="row">
+                    
+                    {% for post in posts %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 hpost">
+                            <div class="card-body">
+                                <h5 class="card-title">{{post.title}}</h5>
+                                <p class="card-text">" {{post.description}} "
+                                </p>
+                                <p class="card-text"> <small class="text-white">
+                                    {{ post.author.user.name|title }}</small> <small style="float:right">{{post.date|date}}</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <hr>
+              
+        </div>
+    </div>
+
+
+</div>
+
+
+{% endblock %}
