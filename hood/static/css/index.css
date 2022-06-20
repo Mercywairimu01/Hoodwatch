@@ -1,0 +1,86 @@
+.person{
+    border: 0px;
+    box-shadow: 4px 0px 0px rgb(245, 149, 24);
+}
+section.index{
+    background-image: url('../images/hero.png');
+    background-position:center;
+    background-repeat: repeat;
+    background-size: cover;
+    height:25vh;
+    margin-top: 30px;
+}
+.hood{
+    color:white;
+    text-align: center;
+    padding-top:50px;
+}
+
+#hint_id_username{
+    display: none;
+}
+#hint_id_password1{
+    display: none;
+}
+#hint_id_password2{
+    display: none;
+}
+#regbtn{
+    margin-top: 15px;
+}
+
+/* footer */
+
+
+footer{
+    background: #111;
+    height: auto;
+    color: #fff;
+  }
+  .footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .socials{
+    padding: 20px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+  }
+  .socials li{
+    margin: 0 10px;
+  }
+  .socials a{
+    text-decoration: none;
+    color: #fff;
+    border: 1.1px solid white;
+    padding: 5px;
+    border-radius: 50%;
+  }
+  .socials a i{
+    width: 20px;
+    transition: color .4s ease;
+  
+  }
+  .socials a:hover i{
+    color: aqua;
+  }
+  
+  .footer-bottom{
+    background: #000;
+    padding: 10px;
+    text-align: center;
+  }
+  .footer-bottom p{ 
+    word-spacing: 2px; 
+  }
+  .footer-bottom p a{
+  color:#44bae8;
+  text-decoration: none;
+  }
