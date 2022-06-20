@@ -43,13 +43,15 @@ class Profile(models.Model):
     about = models.TextField(max_length=254, blank=True)
     image = models.ImageField(upload_to='images/', default='default.png')
     location = models.CharField(max_length=50, blank=True, null=True)
-    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True, related_name='members')
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f'{self.user.username} profile'
+    
     def save(self, **kwargs):
         super().save( **kwargs)
         img= Image.open(self. image.path)
+        
         if img.height > 250 or img.width > 250:
             output_size = (250, 2500)
             img.thumbnail(output_size)
@@ -59,6 +61,7 @@ class Profile(models.Model):
 class Business(models.Model):
     name = models.CharField(max_length=120)
     email = models.EmailField(max_length=254)
+    bs_image = models.ImageField(upload_to='images/',blank=True, null=True)
     neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='owner')
 
@@ -88,7 +91,7 @@ class Post(models.Model):
     title = models.CharField(max_length=120, null=True)
     description=models.TextField(max_length=500)
     date = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_owner')
     hood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, related_name='hood_post')
     
     
@@ -102,9 +105,9 @@ class Post(models.Model):
     @classmethod
     def delete_post(self):
         self.delete()
-
-    def user_post(self,cls,username):
-        posts=cls.objects.filter(author_username=username)
+    @classmethod    
+    def user_post(cls,username):
+        posts= cls.objects.filter(author_id=username)
         return posts
 
     # def get_absolute_url(self):
@@ -112,4 +115,3 @@ class Post(models.Model):
     
     class Meta:
       ordering = ['-id']
-
