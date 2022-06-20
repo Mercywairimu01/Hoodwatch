@@ -13,9 +13,10 @@
       </div>
       <div class='col-md-6 details'>
         <p>Username: {{ current_profile.user.username }}</p>
-        <p>Bio: {{ current_profile.bio }}</p>
-        <p>Email: {{ current_profile.contact }}</p>
+        <p>Bio: {{ current_profile.about }}</p>
+        <p>Email: {{ current_profile.user.email }}</p>
         <p>Location: {{ current_profile.location }}</p>
+        <p>neighbourhood: {{ current_profile.neighbourhood }}</p>
        <!-- Button trigger modal -->
 <button type="button" class="btn btn-outline-secondary btn-md plusicon" data-bs-toggle="modal" data-bs-target="#exampleModal">
   <i class="fas fa-plus"></i> <span>Update Info</span>
