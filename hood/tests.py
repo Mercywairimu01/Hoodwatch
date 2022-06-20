@@ -1,6 +1,4 @@
-from unicodedata import name
 from django.test import TestCase
-
 from .models import *
 
 class NeighbourhoodTestClass(TestCase):
