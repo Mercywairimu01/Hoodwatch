@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+{% block content %}
+{{block.super}}
+<h1 class="text-center mt-5 mb-5">Search for {{ search_name }}</h1>
+<div class="container">
+    <div class="row">
+        {% for business in search_results %}
+        <div class='col'>
+            <div class="text-left p-2">
+                <p><strong>{{ business.name }} owned by: {{ business.user.user.username }}</strong></p>
+                <p>{{business.email}}</p>
+                <p>{{business.neighbourhood.location}}</p>
+               
+                <hr>
+               
+            </div>
+        </div>
+        {% empty %}
+        <p class="alert alert-info text-center">No Search Results for {{ search_name }}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

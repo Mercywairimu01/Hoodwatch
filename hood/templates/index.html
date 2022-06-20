@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<section class="index">
+    <h1 class="hood">WELCOME TO HOODWATCH</h1>
+</section>
+<h3><center>View hoods</center></h3>
+    <hr>
+<div class="container">
+    <div class="row">
+       
+            {% for n in hood %}
+            <div class="col-4">
+            <div class="card" style="width: 18rem;" >
+                <img src="{{ n.hood_img.url }}" class="card-img" alt="...">
+                <div class="card-body">
+                  
+                <p> Name:{{n.name}}
+                  
+                   </p>
+                    <p>Location: {{n.location}}</p>
+                    <p>occupants: {{n.occupant_count}}</p>
+                    <p>Admin: {{n.admin}}</p>
+                   
+                    <a href="{% url 'single-hood' n.id %}" class="btn btn-primary btn-sm">View Hood</a>
+                </div>
+            </a>
+            </div>
+            </div>
+             {% endfor %}
+           </div>
+
+</div>
+<!-- footer -->
+<footer class="mt-4">
+    <div class="footer-content">
+      <ul class="socials">
+        <li>
+          <a href="#"><i class="fa fa-facebook"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-google-plus"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-youtube"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-linkedin-square"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p>copyright &copy;2021 <a href="#">Hoodwatch</a></p>
+    </div>
+  </footer>
+{% endblock %}
